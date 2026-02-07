@@ -634,9 +634,17 @@ export const generateCarouselMessage = async (
 			if (card.image) {
 				const { imageMessage } = await prepareWAMessageMedia({ image: card.image }, mediaOptions)
 				header.imageMessage = imageMessage
+				// Copy jpegThumbnail to header level too (Pastorini sets it in both places)
+				// Header proto field 6 = jpegThumbnail (separate from imageMessage.jpegThumbnail)
+				if (imageMessage?.jpegThumbnail) {
+					header.jpegThumbnail = imageMessage.jpegThumbnail
+				}
 			} else if (card.video) {
 				const { videoMessage } = await prepareWAMessageMedia({ video: card.video }, mediaOptions)
 				header.videoMessage = videoMessage
+				if (videoMessage?.jpegThumbnail) {
+					header.jpegThumbnail = videoMessage.jpegThumbnail
+				}
 			}
 		}
 
