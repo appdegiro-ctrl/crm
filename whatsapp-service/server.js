@@ -239,14 +239,12 @@ app.delete('/session/:session_id', async (req, res) => {
         // Fazer logout
         await session.sock.logout();
         
+        // Limpar dados de autenticação do Supabase
+        await clearSessionAuth(session_id);
+        await updateSessionStatus(session_id, false);
+        
         // Remover sessão
         sessions.delete(session_id);
-
-        // Deletar arquivos da sessão
-        const sessionPath = path.join(sessionsDir, session_id);
-        if (fs.existsSync(sessionPath)) {
-            fs.rmSync(sessionPath, { recursive: true, force: true });
-        }
 
         res.json({ success: true, message: 'Sessão deletada' });
     } catch (error) {
