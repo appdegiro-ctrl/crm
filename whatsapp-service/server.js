@@ -5,7 +5,6 @@ import { createServer } from 'http';
 import makeWASocket, { 
     DisconnectReason, 
     useMultiFileAuthState,
-    makeInMemoryStore,
     fetchLatestBaileysVersion
 } from '@whiskeysockets/baileys';
 import { Boom } from '@hapi/boom';
