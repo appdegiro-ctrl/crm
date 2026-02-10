@@ -242,7 +242,6 @@ app.delete('/session/:session_id', async (req, res) => {
         
         // Remover sessão
         sessions.delete(session_id);
-        stores.delete(session_id);
 
         // Deletar arquivos da sessão
         const sessionPath = path.join(sessionsDir, session_id);
