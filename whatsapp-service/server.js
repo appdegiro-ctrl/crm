@@ -98,7 +98,6 @@ async function createWhatsAppSession(restaurantId, phoneNumber) {
                     setTimeout(() => createWhatsAppSession(restaurantId, phoneNumber), 3000);
                 } else {
                     sessions.delete(restaurantId);
-                    stores.delete(restaurantId);
                 }
 
                 isConnected = false;
