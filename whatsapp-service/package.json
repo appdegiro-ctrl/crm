@@ -9,13 +9,14 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
     "@whiskeysockets/baileys": "file:..",
-    "express": "^4.21.2",
     "cors": "^2.8.5",
-    "qrcode": "^1.5.4",
-    "socket.io": "^4.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "pino": "^9.6.0",
-    "dotenv": "^16.4.7"
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
