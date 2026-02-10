@@ -71,8 +71,6 @@ async function createWhatsAppSession(restaurantId, phoneNumber) {
             }
         });
 
-        store.bind(sock.ev);
-
         let qrCode = null;
         let isConnected = false;
 
