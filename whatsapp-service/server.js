@@ -4,16 +4,19 @@ import { Server } from 'socket.io';
 import { createServer } from 'http';
 import makeWASocket, { 
     DisconnectReason, 
-    useMultiFileAuthState,
     fetchLatestBaileysVersion
 } from '@whiskeysockets/baileys';
 import { Boom } from '@hapi/boom';
 import QRCode from 'qrcode';
 import P from 'pino';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import {
+    useSupabaseAuthState,
+    getActiveSessions,
+    updateSessionStatus,
+    saveQRCode,
+    clearSessionAuth
+} from './supabase-auth-adapter.js';
 
 dotenv.config();
 
