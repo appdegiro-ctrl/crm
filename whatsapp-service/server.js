@@ -94,12 +94,18 @@ async function createWhatsAppSession(restaurantId, phoneNumber) {
                 }
 
                 isConnected = false;
+                await updateSessionStatus(restaurantId, false);
                 io.to(restaurantId).emit('disconnected');
             } else if (connection === 'open') {
                 logger.info(`Conexão aberta para restaurante ${restaurantId}`);
                 isConnected = true;
                 qrCode = null;
-                io.to(restaurantId).emit('connected', { phoneNumber: sock.user?.id });
+                
+                const userPhone = sock.user?.id?.split(':')[0] || phoneNumber;
+                await updateSessionStatus(restaurantId, true, userPhone);
+                await saveQRCode(restaurantId, null); // Limpar QR code
+                
+                io.to(restaurantId).emit('connected', { phoneNumber: userPhone });
             }
         });
 
