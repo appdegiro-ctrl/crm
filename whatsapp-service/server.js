@@ -72,6 +72,9 @@ async function createWhatsAppSession(restaurantId, phoneNumber) {
                 // Gerar QR Code
                 qrCode = await QRCode.toDataURL(qr);
                 
+                // Salvar QR Code no Supabase
+                await saveQRCode(restaurantId, qrCode);
+                
                 // Emitir QR Code via Socket.IO
                 io.to(restaurantId).emit('qr', { qrCode });
                 
