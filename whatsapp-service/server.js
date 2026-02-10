@@ -294,6 +294,27 @@ io.on('connection', (socket) => {
 });
 
 // Iniciar servidor
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, async () => {
     logger.info(`WhatsApp Service rodando na porta ${PORT}`);
+    
+    // Recuperar sessões ativas ao iniciar
+    logger.info('Recuperando sessões ativas do banco de dados...');
+    try {
+        const activeSessions = await getActiveSessions();
+        logger.info(`Encontradas ${activeSessions.length} sessões ativas`);
+        
+        for (const session of activeSessions) {
+            if (session.restaurant_id && session.phone_number) {
+                logger.info(`Reconectando sessão: ${session.restaurant_id}`);
+                setTimeout(() => {
+                    createWhatsAppSession(session.restaurant_id, session.phone_number)
+                        .catch(err => {
+                            logger.error(`Erro ao reconectar ${session.restaurant_id}:`, err);
+                        });
+                }, 2000); // Delay para evitar sobrecarga
+            }
+        }
+    } catch (err) {
+        logger.error('Erro ao recuperar sessões:', err);
+    }
 });
