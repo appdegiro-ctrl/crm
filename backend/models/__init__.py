@@ -6,7 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Usar Supabase em vez de PostgreSQL local
 DATABASE_URL = os.getenv("DATABASE_URL")
+
+# Nota: Você precisa configurar a senha do banco no Supabase
+# Vá em: Settings → Database → Connection string
+# E atualize o .env com a URL completa incluindo a senha
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
