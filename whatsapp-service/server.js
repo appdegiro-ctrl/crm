@@ -60,10 +60,6 @@ async function createWhatsAppSession(restaurantId, phoneNumber) {
         const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
         const { version } = await fetchLatestBaileysVersion();
 
-        // Criar store para a sessão
-        const store = makeInMemoryStore({ logger });
-        stores.set(restaurantId, store);
-
         const sock = makeWASocket({
             version,
             logger,
