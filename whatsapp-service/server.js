@@ -40,7 +40,6 @@ const logger = P({ level: 'info' });
 
 // Armazenar sessões ativas
 const sessions = new Map();
-const stores = new Map();
 
 // Garantir que o diretório de sessões existe
 const sessionsDir = path.join(__dirname, 'sessions');
