@@ -41,12 +41,6 @@ const logger = P({ level: 'info' });
 // Armazenar sessões ativas
 const sessions = new Map();
 
-// Garantir que o diretório de sessões existe
-const sessionsDir = path.join(__dirname, 'sessions');
-if (!fs.existsSync(sessionsDir)) {
-    fs.mkdirSync(sessionsDir, { recursive: true });
-}
-
 // Função para criar uma sessão do WhatsApp
 async function createWhatsAppSession(restaurantId, phoneNumber) {
     try {
