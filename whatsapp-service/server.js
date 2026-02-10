@@ -44,14 +44,10 @@ const sessions = new Map();
 // Função para criar uma sessão do WhatsApp
 async function createWhatsAppSession(restaurantId, phoneNumber) {
     try {
-        const sessionPath = path.join(sessionsDir, restaurantId);
-        
-        // Criar diretório da sessão se não existir
-        if (!fs.existsSync(sessionPath)) {
-            fs.mkdirSync(sessionPath, { recursive: true });
-        }
+        logger.info(`Criando sessão para restaurante ${restaurantId}`);
 
-        const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
+        // Usar Supabase em vez de arquivos locais
+        const { state, saveCreds } = await useSupabaseAuthState(restaurantId);
         const { version } = await fetchLatestBaileysVersion();
 
         const sock = makeWASocket({
