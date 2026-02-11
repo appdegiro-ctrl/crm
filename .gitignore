@@ -19,3 +19,7 @@ test.ts
 TestData
 wa-logs*
 coverage
+-e 
+# Environment files
+*.env
+*.env.*
